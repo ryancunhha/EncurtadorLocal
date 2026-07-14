@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Encurtador</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input {
+            padding: 10px;
+            width: 60%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Encurtador de Links <span style="font-size: 16px">Base62</span></h1>
+        <p>Gerar o link encurtado por 1 minuto. Faça o teste!</p>
+
+        <div>
+            <input type="text" id="urlInput" placeholder="Cole sua URL longa aqui">
+            <button onclick="encurtar()">Encurtar</button>
+        </div>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        async function encurtar() {
+            const url = document.getElementById("urlInput").value;
+            if (!url) return alert("Digite uma URL válida!");
+
+            try {
+                const resposta = await fetch("/encurtar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: url })
+                });
+
+                const dados = await resposta.json();
+                const div = document.getElementById('resultado');
+                div.innerHTML = `Seu link: <a href="${dados.urlCurta}" target="_blank">${dados.urlCurta}</a>`;
+            } catch (e) {
+                alert('Erro de conexão. O servidor (server.js) está rodando?');
+            }
+        }
+    </script>
+</body>
+
+</html>
