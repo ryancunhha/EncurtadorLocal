@@ -8,7 +8,7 @@ Um projeto prático desenvolvido em **Node.js** para entender os fundamentos de 
 
 ## Funcionalidades
 
-*   **Matemática Base62:** Utiliza um algoritmo de divisões sucessivas (onde 10000 ÷ 64 dá 156 com resto 16, e 156 ÷ 64 dá 2 com resto 28) para converter IDs sequenciais numéricos em chaves curtas alfanuméricas. Isso garante que não haja "colisões" (duas URLs com o mesmo código curto).
+*   **Matemática Base62:** Utiliza um algoritmo de divisões sucessivas para converter IDs sequenciais chaves curtas. Por exemplo, para converter o ID 10000, o algoritmo realiza as divisões 10000 ÷ 62 = 161 (resto 18), 161 ÷ 62 = 2 (resto 37) e 2 ÷ 62 = 0 (resto 2). Para não ocorrem colisões duas URLs diferentes gerando o mesmo código curto.
 *   **Links Temporários (Snapchat):** Funcionalidade de "Temporarizador" onde os links gerados expiram automaticamente após 1 minuto. Após esse tempo, o sistema retorna um erro HTTP 410.
 *   **Redirecionamento Rápido:** Recebe a requisição do link curto e redireciona o usuário instantaneamente para a URL original longa.
 *   **Frontend Simples:** Interface limpa construída em HTML e CSS para testar a geração das URLs.
