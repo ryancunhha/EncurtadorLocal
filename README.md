@@ -2,9 +2,13 @@
 
 Um projeto prático desenvolvido em **Node.js** para entender os fundamentos de como sistemas de encurtamento de URLs (como o Bitly) funcionam por baixo
 
+## Alfabeto Base62
+
+*0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*
+
 ## Funcionalidades
 
-*   **Matemática Base62:** Utiliza um algoritmo de divisões sucessivas para converter IDs sequenciais numéricos em chaves curtas alfanuméricas. Isso garante que não haja "colisões" (duas URLs com o mesmo código curto).
+*   **Matemática Base62:** Utiliza um algoritmo de divisões sucessivas (onde 10000 ÷ 64 dá 156 com resto 16, e 156 ÷ 64 dá 2 com resto 28) para converter IDs sequenciais numéricos em chaves curtas alfanuméricas. Isso garante que não haja "colisões" (duas URLs com o mesmo código curto).
 *   **Links Temporários (Snapchat):** Funcionalidade de "Temporarizador" onde os links gerados expiram automaticamente após 1 minuto. Após esse tempo, o sistema retorna um erro HTTP 410.
 *   **Redirecionamento Rápido:** Recebe a requisição do link curto e redireciona o usuário instantaneamente para a URL original longa.
 *   **Frontend Simples:** Interface limpa construída em HTML e CSS para testar a geração das URLs.
